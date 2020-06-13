@@ -1,0 +1,15 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/vcs.xml
+.idea/workspace.xml
+djangotest/__pycache__/
+module_app/__pycache__/
+module_app/migrations/__pycache__/
+project_app/__pycache__/
+project_app/migrations/__pycache__/
+templates/__pycache__/
+testapp/__pycache__/
+testapp/migrations/__pycache__/
+testapp/models/__pycache__/
+testapp/views/__pycache__/
+user_app/__pycache__/
+user_app/migrations/__pycache__/
