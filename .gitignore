@@ -13,3 +13,4 @@ testapp/models/__pycache__/
 testapp/views/__pycache__/
 user_app/__pycache__/
 user_app/migrations/__pycache__/
+.idea/inspectionProfiles/
