@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block abc %}
+    <div class="container">
+      <form class="form-signin" action="/index/" method="post">
+        <h2 class="form-signin-heading">接口自动化登录平台</h2>
+        <label >username</label>
+        <input type="text" name="username" class="form-control" placeholder="用户名">
+        <label >password</label>
+        <input type="password" name="password" class="form-control" placeholder="密码">
+        <div class="checkbox">
+        </div>
+          <div style="color:red">{{ error }}</div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录按钮</button>
+          <!--{% csrf_token %}-->
+      </form>
+    </div> <!-- /container -->
+  {% endblock %}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="../../favicon.ico">
+    <title>接口测试平台</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="https://v3.bootcss.com/examples/dashboard/dashboard.css" rel="stylesheet">
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">导航栏</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">接口测试平台</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/settings">设置</a></li>
+            <li><a href="/loginout">退出</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li  class="active"><a href="/project"><i class="glyphicon glyphicon-th-large"></i>&nbsp项目管理</a></li>
+            <li  ><a href="/module"><i class="glyphicon glyphicon-th"></i>&nbsp模块管理</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">用例管理</a></li>
+            <li><a href="">任务管理</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">mock Server</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+          <!--项目列表-->
+          {% if type == "list" %}
+          <h4 class="page-header">项目列表
+            <button type="button"
+                                              class="btn btn-primary"
+                                              style="float:right;"
+                                              onclick="location.href='/project/add_project/'">创建</button>
+          </h4>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>名称</th>
+                  <th>描述</th>
+                  <th>状态</th>
+                  <th>创建时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+
+              <tbody>
+              {% for project in projects %}
+                <tr>
+                  <td>{{project.id}}</td>
+                  <td>{{project.name}}</td>
+                  <td>{{project.describe}}</td>
+                  <td>
+                  {% if project.status == True %}
+                    <span>开启</span>
+                  {% else %}
+                    <span>关闭</span>
+                  {% endif %}
+                  </td>
+                  <td>{{project.update_time | date:"Y-m-d H:i:s"}}</td>
+                  <td><a href="/project/edit_project/{{ project.id }}" style="padding-right:3px"><i class="glyphicon glyphicon-pencil"></i></a>
+                  <a href="/project/delete_project/{{ project.id }}"><i class="glyphicon glyphicon-trash"></i></a>
+                  </td>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% endif %}
+
+          <!--创建项目-->
+          {% if type == "add" %}
+          <form class="form-horizontal" method="post" action="/project/add_project/">
+      <div id="legend" class="">
+        <legend class="">创建项目</legend>
+      </div>
+      <div class="control-group">
+      <!-- Text input-->
+          <label class="control-label" for="input01">项目名称</label>
+          <div class="controls">
+            <input type="text" name="name" class="input-xlarge">
+            <span style="color:red">{{ name_error }}</span>
+          </div>
+        </div>
+      <!-- Textarea -->
+          <label class="control-label">项目描述</label>
+            <div class="textarea">
+                  <textarea type="" name="describe" style="width:176px;height: 106px"> </textarea>
+            </div>
+        <div class="control-group">
+            <!-- Inline Radios -->
+          <label >
+              <input type="radio" value="1" checked="checked" name="status">
+              <span>开启</span>
+          </label>
+          <label >
+              <input type="radio" value="0"  name="status">
+              <span>关闭</span>
+          </label>
+        </div>
+
+        <div class="control-group">
+          <!-- Button -->
+          <div class="controls">
+            <button class="btn btn-success">创建</button>
+          </div>
+        </div>
+  </form>
+          {% endif %}
+
+          <!--编辑项目-->
+          {% if type == "edit" %}
+          <form class="form-horizontal" method="post" action="/project/edit_project/{{ id }}/">
+            {{ form.as_p }}
+            <input type="submit" value="提交">
+          </form>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  </body>
+</html>
