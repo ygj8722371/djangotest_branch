@@ -42,7 +42,7 @@ urlpatterns = [
     # 登录
     path('admin/', admin.site.urls),
     path('index/',views.index),
-    path('logout/',views.logout),
+    path('loginout/',views.loginout),
     path('',views.index),
     # 项目
     path('project/', include('project_app.urls')),

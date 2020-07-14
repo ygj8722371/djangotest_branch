@@ -20,6 +20,6 @@ def index(request):
             auth.login(request,user)
             return HttpResponseRedirect('/project')
 
-def logout(request):
+def loginout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/index/')
+    return HttpResponseRedirect('/index')
